@@ -15,8 +15,8 @@ const BaseTemplate = (props: {
   children: React.ReactNode;
   rightNav?: React.ReactNode;
 }) => {
-  const isSidebarOpen = useSelector((state: RootState) => state.sidebar.isOpen); // Use RootState
-  const activeMenus = useSelector((state: RootState) => state.menu.activeMenus); // Use RootState
+  const isSidebarOpen = useSelector((state: RootState) => state.sidebar.isOpen);
+  const activeMenus = useSelector((state: RootState) => state.menu.activeMenus);
   const dispatch = useDispatch();
 
   return (
@@ -42,10 +42,9 @@ const BaseTemplate = (props: {
       </nav>
 
       <div className="flex size-full pt-[72px]">
-        {' '}
         {/* Add padding-top to avoid overlap with Navbar */}
         <div
-          className={`fixed left-0 top-0 z-40 h-screen w-[237px] bg-white shadow-lg transition-transform duration-300 ease-in-out${
+          className={`fixed left-0 top-0 z-40 h-screen w-[237px] bg-white shadow-lg transition-transform duration-300 ease-in-out ${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
         >
