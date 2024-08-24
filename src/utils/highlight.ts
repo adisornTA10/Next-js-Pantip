@@ -61,7 +61,7 @@ export async function getHighlights() {
         imageUrl: 'https://ptcdn.info/home_highlight/2023-09/64f586c3caac0a43be1e9c04_ohwbqfbnf2_200.jpg',
       },
     ];
-    $('div.pt-block.pt-block-purple-2.m-b-20 ul li').each((index, element) => {
+    $('div.pt-block.pt-block-purple-2.m-b-20 ul li').each((_, element) => {
       const title = $(element).find('h2 a strong').text().trim();
       const subtitle = $(element).find('h2 a').contents().not('strong').text().trim();
       const date = $(element).find('h2 a').text().trim().split(' ').pop();

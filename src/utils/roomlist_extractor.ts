@@ -96,7 +96,9 @@ export async function getPantipRoomLists() {
         imageUrl: 'https://ptcdn.info/mobile/icon_room/pt-forum-family.svg',
       },
     ];
-    $('div.pt-block.pt-block-purple-2.m-b-20 ul li').each((index, element) => {
+
+    // ปรับแก้โดยแทนที่ index ด้วย _
+    $('div.pt-block.pt-block-purple-2.m-b-20 ul li').each((_, element) => {
       const title = $(element).find('h2 a strong').text().trim();
       const subtitle = $(element).find('h2 a').contents().not('strong').text().trim();
       const date = $(element).find('h2 a').text().trim().split(' ').pop();

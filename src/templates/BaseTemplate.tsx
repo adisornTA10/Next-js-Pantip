@@ -1,12 +1,13 @@
-"use client";
+'use client';
 
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { toggleSidebar } from '@/store/sidebarSlice';
-import { setActiveMenu } from '@/store/menuSlice';
-import { MdOutlineMenu } from 'react-icons/md';
 import { IoMdHome } from 'react-icons/io';
-import { MdOutlineGroups } from 'react-icons/md';
+import { MdOutlineMenu } from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { setActiveMenu } from '@/store/menuSlice';
+import { toggleSidebar } from '@/store/sidebarSlice';
+import type { RootState } from '@/store/store';
 
 const BaseTemplate = (props: {
   leftNav?: React.ReactNode;
@@ -14,13 +15,13 @@ const BaseTemplate = (props: {
   children: React.ReactNode;
   rightNav?: React.ReactNode;
 }) => {
-  const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
-  const activeMenus = useSelector((state) => state.menu.activeMenus); // ดึงสถานะ active ของทุกเมนู
+  const isSidebarOpen = useSelector((state: RootState) => state.sidebar.isOpen); // ใช้ RootState
+  const activeMenus = useSelector((state: RootState) => state.menu.activeMenus); // ใช้ RootState
   const dispatch = useDispatch();
 
   return (
     <div className="relative bg-white">
-      <nav className="fixed top-0 w-full bg-white flex justify-between items-center p-4 shadow-sm z-50">
+      <nav className="fixed top-0 z-50 flex w-full items-center justify-between bg-white p-4 shadow-sm">
         <div className="flex items-center space-x-4 md:space-x-6">
           <button
             onClick={() => dispatch(toggleSidebar())}
@@ -31,19 +32,21 @@ const BaseTemplate = (props: {
           {props.leftNav}
         </div>
 
-        <div className="hidden md:flex justify-center w-2/4">
+        <div className="hidden w-2/4 justify-center md:flex">
           {props.searchBar}
         </div>
 
-        <ul className="flex items-center text-black space-x-4 md:space-x-6">
+        <ul className="flex items-center space-x-4 text-black md:space-x-6">
           {props.rightNav}
         </ul>
       </nav>
-      <div className="flex w-full h-full pt-[72px]"> {/* เพิ่ม padding-top เพื่อเลี่ยงการซ้อนทับกับ Navbar */}
+      <div className="flex size-full pt-[72px]">
+        {' '}
+        {/* เพิ่ม padding-top เพื่อเลี่ยงการซ้อนทับกับ Navbar */}
         <div
-          className={`transform transition-transform duration-300 ease-in-out fixed top-0 left-0 ${
+          className={`fixed left-0 top-0 transition-transform duration-300 ease-in-out${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          } bg-white w-[237px] h-screen text-black shadow-lg z-40`}
+          } z-40 h-screen w-[237px] bg-white text-black shadow-lg`}
         >
           <div className="mt-[72px] h-screen w-[237px] bg-white text-black">
             <button
