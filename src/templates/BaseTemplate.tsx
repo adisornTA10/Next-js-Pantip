@@ -15,8 +15,8 @@ const BaseTemplate = (props: {
   children: React.ReactNode;
   rightNav?: React.ReactNode;
 }) => {
-  const isSidebarOpen = useSelector((state: RootState) => state.sidebar.isOpen); // ใช้ RootState
-  const activeMenus = useSelector((state: RootState) => state.menu.activeMenus); // ใช้ RootState
+  const isSidebarOpen = useSelector((state: RootState) => state.sidebar.isOpen); // Use RootState
+  const activeMenus = useSelector((state: RootState) => state.menu.activeMenus); // Use RootState
   const dispatch = useDispatch();
 
   return (
@@ -40,13 +40,14 @@ const BaseTemplate = (props: {
           {props.rightNav}
         </ul>
       </nav>
+
       <div className="flex size-full pt-[72px]">
         {' '}
-        {/* เพิ่ม padding-top เพื่อเลี่ยงการซ้อนทับกับ Navbar */}
+        {/* Add padding-top to avoid overlap with Navbar */}
         <div
-          className={`fixed left-0 top-0 transition-transform duration-300 ease-in-out${
+          className={`fixed left-0 top-0 z-40 h-screen w-[237px] bg-white shadow-lg transition-transform duration-300 ease-in-out${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          } z-40 h-screen w-[237px] bg-white text-black shadow-lg`}
+          }`}
         >
           <div className="mt-[72px] h-screen w-[237px] bg-white text-black">
             <button
